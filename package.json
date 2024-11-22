@@ -3,15 +3,23 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "build": "nuxt build",
+    "start": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "analyze": "npx nuxi analyze"
+  },
+  "engines": {
+    "npm": "~10.7.0",
+    "node": "~18.20.3"
   },
   "dependencies": {
     "nuxt": "^3.14.1592",
+    "sanitize.css": "^13.0.0",
     "vue": "latest",
     "vue-router": "latest"
+  },
+  "devDependencies": {
+    "sass": "^1.81.0"
   }
 }

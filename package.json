@@ -7,7 +7,10 @@
     "build": "nuxt build",
     "start": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "analyze": "npx nuxi analyze"
+    "analyze": "npx nuxi analyze",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier": "prettier . --write"
   },
   "engines": {
     "npm": "~10.7.0",
@@ -20,6 +23,12 @@
     "vue-router": "latest"
   },
   "devDependencies": {
-    "sass": "^1.81.0"
+    "@nuxt/eslint": "^0.7.1",
+    "@nuxt/eslint-config": "^0.7.1",
+    "eslint": "^9.15.0",
+    "eslint-plugin-format": "^0.1.2",
+    "prettier": "^3.3.3",
+    "sass": "^1.81.0",
+    "typescript": "^5.7.2"
   }
 }

@@ -1,14 +1,24 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
+  /**
+   * ESLint Module - https://eslint.nuxt.com/packages/module
+   */
+  modules: ['@nuxt/eslint'],
+
   /**
    * Disable Nuxt component auto-registration
    * https://nuxt.com/docs/api/nuxt-config#components
    */
   components: false,
+
   devtools: {
     enabled: true,
   },
+
+  /**
+   * Global Styles Imports
+   * https://nuxt.com/docs/getting-started/assets#global-styles-imports
+   */
   css: [
     '@/node_modules/sanitize.css',
     '@/node_modules/sanitize.css/forms.css',
@@ -16,6 +26,9 @@ export default defineNuxtConfig({
     '@/node_modules/sanitize.css/assets.css',
     '@/src/assets/styles/style.scss',
   ],
+
+  compatibilityDate: '2024-11-01',
+
   nitro: {
     compressPublicAssets: {
       /**
@@ -32,6 +45,7 @@ export default defineNuxtConfig({
      */
     sourceMap: false,
   },
+
   vite: {
     css: {
       preprocessorOptions: {
@@ -46,6 +60,6 @@ export default defineNuxtConfig({
        * https://vite.dev/config/build-options#build-reportcompressedsize
        */
       reportCompressedSize: false, // TODO: doesn't seem to be working
-    }
-  }
-})
+    },
+  },
+});

@@ -1,0 +1,10 @@
+[production]
+>0.5%
+not dead
+not op_mini all
+
+[development]
+last 1 version
+
+[ssr]
+node 18

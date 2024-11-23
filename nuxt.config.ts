@@ -8,10 +8,6 @@ export default defineNuxtConfig({
   components: false,
   devtools: {
     enabled: true,
-
-    timeline: {
-      enabled: true
-    }
   },
   css: [
     '@/node_modules/sanitize.css',

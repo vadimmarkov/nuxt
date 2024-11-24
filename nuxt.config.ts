@@ -1,5 +1,27 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  dir: {
+    layouts: './src/layouts',
+    pages: './src/pages',
+  },
+
+  alias: {
+    '~': '@/src',
+    images: '@/public/images',
+    libs: '@/src/libs',
+    assets: '@/src/assets',
+    components: '@/src/components',
+    composables: '@/src/composables',
+    modals: '@/src/modals',
+    utils: '@/src/utils',
+  },
+
+  runtimeConfig: {
+    public: {
+      serverUri: null,
+    },
+  },
+
   /**
    * ESLint Module - https://eslint.nuxt.com/packages/module
    */

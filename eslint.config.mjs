@@ -20,9 +20,9 @@ export default createConfigForNuxt({
     formatters: false,
   },
 }).append(
-  {
+  // {
     // ignores: [""],
-  },
+  // },
   {
     files: ['**/*.js', '**/*.mjs', '**/*.ts', '**/*.vue'],
     rules: {

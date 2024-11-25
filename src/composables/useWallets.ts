@@ -1,4 +1,4 @@
-import { delay } from 'utils';
+import { delay } from '~/utils';
 
 type iWalletName = 'TronLink' | 'MetaMask' | 'Binance' | 'Coin98';
 

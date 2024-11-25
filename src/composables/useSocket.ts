@@ -6,7 +6,7 @@ export function useSocket() {
   console.log('use socket in');
 
   async function initSocket() {
-    const { default: Socket } = await import('libs/socketMediator.class.ts');
+    const { default: Socket } = await import('~/libs/socketMediator.class.ts');
 
     socket = new Socket();
   }

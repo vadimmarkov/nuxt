@@ -5,8 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import { useSocket } from 'composables/useSocket.ts';
-import { useWallets } from 'composables/useWallets';
+import { useSocket } from '~/composables/useSocket.ts';
+import { useWallets } from '~/composables/useWallets';
 
 const { initSocket, socket } = useSocket();
 const { loginByWallet } = useWallets();

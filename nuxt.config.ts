@@ -10,24 +10,20 @@ export default defineNuxtConfig({
     },
 
     dir: {
-        layouts: './src/layouts',
-        pages: './src/pages',
+        layouts: './app/layouts',
+        pages: './app/pages',
+        plugins: './app/plugins',
+        middleware: './app/middleware',
     },
 
     alias: {
-        '~': '@/src',
+        '~': '@/app',
         images: '@/public/images',
-        // libs: '@/src/libs',
-        // assets: '@/src/assets',
-        // components: '@/src/components',
-        // composables: '@/src/composables',
-        // modals: '@/src/modals',
-        // utils: '@/src/utils',
     },
 
-    future: {
-        compatibilityVersion: 4,
-    },
+    // future: {
+    // compatibilityVersion: 4,
+    // },
 
     runtimeConfig: {
         public: {
@@ -47,11 +43,11 @@ export default defineNuxtConfig({
     components: false,
 
     devtools: {
-      enabled: true,
-
-      timeline: {
         enabled: true,
-      },
+
+        timeline: {
+            enabled: true,
+        },
     },
 
     /**
@@ -63,7 +59,7 @@ export default defineNuxtConfig({
         '@/node_modules/sanitize.css/forms.css',
         '@/node_modules/sanitize.css/reduce-motion.css',
         '@/node_modules/sanitize.css/assets.css',
-        '@/src/assets/styles/style.scss',
+        '@/app/assets/styles/style.scss',
     ],
 
     compatibilityDate: '2024-11-01',

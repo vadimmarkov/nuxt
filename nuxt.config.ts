@@ -7,6 +7,13 @@ export default defineNuxtConfig({
             charset: 'utf-8',
             viewport: 'width=device-width, initial-scale=1',
         },
+        script: [
+            {
+                src: '/_nuxt/entry.js',
+                body: true, // Додає скрипт у кінець <body>
+                type: 'module',
+            },
+        ],
     },
 
     dir: {

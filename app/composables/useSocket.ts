@@ -18,9 +18,9 @@ export function useSocket() {
 
         const person = new Socket();
 
-        console.log('person', person);
+        // console.log('person', person);
 
-        console.log(person.greet());
+        // console.log(person.greet());
 
         socket = person;
     }

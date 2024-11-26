@@ -10,11 +10,11 @@ class SocketMediator {
     private name: string;
 
     constructor() {
-        console.log('constructor');
+        // console.log('constructor');
 
         this.socket = io(serverUri);
 
-        this.name = 'pizda';
+        // this.name = 'pizda';
     }
 
     /**
@@ -42,9 +42,9 @@ class SocketMediator {
         });
     }
 
-    greet(): string {
-        return `Hello, my name is Pedro and I am 100 years old.`;
-    }
+    // greet(): string {
+    //     return `Hello, my name is Pedro and I am 100 years old.`;
+    // }
 }
 
 export default SocketMediator;

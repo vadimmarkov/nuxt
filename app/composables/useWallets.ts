@@ -14,7 +14,9 @@ export function useWallets() {
         if (walletIsReady) {
             // const s = checkIfWalletIsReady([wallet])
 
-            await loginByWallet(wallet);
+            const token = await loginByWallet(wallet);
+
+            return token;
         }
     }
 
@@ -83,6 +85,8 @@ export function useWallets() {
         const token = await getToken({ address, signature });
 
         console.log({ token });
+
+        return token;
     }
 
     async function getWalletAddress(wallet: iWalletName): Promise<string> {
@@ -174,7 +178,7 @@ export function useWallets() {
             ...payload,
         };
 
-        const { token, error, code } = await socket.emit('auth.nonce', options);
+        const { token, error, code } = await socket.emit('auth.sign', options);
 
         console.log(token, error, code);
 

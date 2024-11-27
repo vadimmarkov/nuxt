@@ -15,15 +15,15 @@
 </template>
 
 <script setup lang="ts">
-import { useSocket } from '~/composables/useSocket.ts';
+// import { useSocket } from '~/composables/useSocket.ts';
 
 const dapps = useState('connectionData');
 
-const { initSocket } = useSocket();
+// const { initSocket } = useSocket();
 
-onMounted(async () => {
-    await initSocket();
-});
+// onMounted(async () => {
+//     await initSocket();
+// });
 </script>
 
 <style module>

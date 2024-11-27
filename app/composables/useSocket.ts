@@ -1,36 +1,51 @@
+import { io } from 'socket.io-client';
+
 console.log('use socket out');
 
-let socket;
+const { serverUri } = useRuntimeConfig().public;
+
+const socket = io(serverUri);
+
+// const socket = ref();
+
+const emit = (eventName: string, args = {}) => {
+    return new Promise((resolve): void => {
+        socket.emit(eventName, args, (response: any) => {
+            resolve(response);
+        });
+    });
+};
 
 export function useSocket() {
     console.log('use socket in');
 
-    async function initSocket() {
-        console.log('initSocket');
+    // async function initSocket() {
+    //     console.log('initSocket');
+    //
+    //     const { default: Socket } = await import(
+    //         '~/libs/socketMediator.class.ts'
+    //     );
 
-        const { default: Socket } = await import(
-            '~/libs/socketMediator.class.ts'
-        );
+    // const { default: Person } = await import(
+    //     '~/libs/Person.ts'
+    // );
 
-        // const { default: Person } = await import(
-        //     '~/libs/Person.ts'
-        // );
+    // const Socket = new Socket();
 
-        const person = new Socket();
+    // console.log('person', person);
 
-        // console.log('person', person);
+    // console.log(person.greet());
 
-        // console.log(person.greet());
+    // socket.value = new Socket();
+    // }
 
-        socket = person;
-    }
-
-    const getSocket = computed(() => {
-        return socket;
-    });
+    // const getSocket = computed(() => {
+    //     return socket;
+    // });
 
     return {
-        initSocket,
-        socket: getSocket.value,
+        socket,
+
+        emit,
     };
 }

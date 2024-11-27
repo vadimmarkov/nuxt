@@ -16,6 +16,20 @@ export default defineNuxtConfig({
         ],
     },
 
+    /**
+     * Disable auto-importing components
+     */
+    components: {
+        dirs: [],
+    },
+
+    /**
+     * Disable auto-importing composables and utilities
+     */
+    // imports: {
+    //     autoImport: false
+    // },
+
     dir: {
         layouts: './app/layouts',
         pages: './app/pages',

@@ -6,15 +6,11 @@
  */
 
 import { createConfigForNuxt } from '@nuxt/eslint-config/flat';
-// import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 /**
  * Config example - https://github.dev/nuxt/eslint/blob/main/packages/eslint-config/src/flat/configs/nuxt.ts
  */
 
-console.log('eslint', process.env.NODE_ENV);
-
-// for pretter - https://www.npmjs.com/package/eslint-plugin-format
 export default createConfigForNuxt({
     features: {
         stylistic: false,
@@ -22,9 +18,9 @@ export default createConfigForNuxt({
         formatters: false,
     },
 }).append(
-    // {
-    // ignores: [""],
-    // },
+    {
+        ignores: [''],
+    },
     {
         files: ['**/*.js', '**/*.mjs', '**/*.ts', '**/*.vue'],
         rules: {

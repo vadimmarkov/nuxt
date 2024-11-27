@@ -16,17 +16,8 @@ const url = `${serverUri}/api/front-gateway/getConnectionData`;
 await callOnce(async () => {
     const { data } = await useFetch(url, {
         pick: ['dapps'],
-        // transform: (data: any) => {
-        //     console.log('data', data);
-        //
-        //     return data;
-        // },
     });
 
-    const dapps = data.value.dapps;
-
-    console.log('dapps', dapps);
-
-    connectionData.value = dapps;
+    connectionData.value = data.value.dapps;
 });
 </script>

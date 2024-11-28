@@ -1,6 +1,6 @@
 <template>
     <p :class="$style.red">index page</p>
-    <img src="images/public-logo.png" alt="" />
+    <!--<img src="images/public-logo.png" alt="" >-->
 
     <ul>
         <li>
@@ -18,6 +18,7 @@
 // import { useSocket } from '~/composables/useSocket.ts';
 
 const dapps = useState('connectionData');
+// const a = 1;
 
 // const { initSocket } = useSocket();
 

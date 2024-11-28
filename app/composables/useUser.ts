@@ -8,7 +8,7 @@ export const useUser = () => {
     });
 
     async function getProfile(token: string) {
-        console.log('getProfile', token);
+        // console.log('getProfile', token);
 
         // token,
         //     currency: currentCurrency,
@@ -20,9 +20,9 @@ export const useUser = () => {
             token,
         };
 
-        const profile = await socket('profile.token', options);
+        const profile = await socket.emit('profile.token', options);
 
-        console.log('profile', profile);
+        // console.log('profile', profile);
 
         user.value = profile;
     }

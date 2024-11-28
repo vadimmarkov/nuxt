@@ -1,7 +1,7 @@
 import { useSocket } from '@/app/composables/useSocket';
 import delay from '~/utils/delay';
 
-const { socket, emit } = useSocket();
+const { emit } = useSocket();
 
 type iWalletName = 'TronLink' | 'MetaMask' | 'Binance' | 'Coin98';
 
@@ -63,7 +63,7 @@ export function useWallets() {
     }
 
     async function loginByWallet(wallet: iWalletName) {
-        console.log('loginByWallet');
+        // console.log('loginByWallet');
 
         const address = await getWalletAddress(wallet);
 
@@ -75,16 +75,16 @@ export function useWallets() {
             wallet_name: 'TronLink',
         };
 
-        console.log({ address });
+        // console.log({ address });
 
         // const { nonce } = await socket.emit('auth.nonce', noncePayload);
         const { nonce } = await emit('auth.nonce', noncePayload);
 
-        console.log({ nonce });
+        // console.log({ nonce });
 
         const signature = await getSignature(wallet, nonce, address);
 
-        console.log({ signature });
+        // console.log({ signature });
 
         const token = await getToken({
             address,
@@ -92,7 +92,7 @@ export function useWallets() {
             fingerprint: 'bd53ff47d216cc549045adc3f8eb480e',
         });
 
-        console.log({ token });
+        // console.log({ token });
 
         return token;
     }
@@ -189,9 +189,9 @@ export function useWallets() {
         };
 
         // const { token, error, code } = await socket.emit('auth.sign', options);
-        const { token, error, code } = await emit('auth.sign', options);
+        const { token } = await emit('auth.sign', options);
 
-        console.log(token, error, code);
+        // console.log(token, error, code);
 
         return token;
     }

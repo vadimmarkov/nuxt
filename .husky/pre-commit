@@ -1,1 +1,8 @@
-npx lint-staged
+#!/bin/sh
+if [ -e .git/MERGE_MSG ]; then
+    echo "Merge commit skipping image compression"
+else
+    npx lint-staged # --debug
+
+    # exit 1 // uncomment for testing
+fi

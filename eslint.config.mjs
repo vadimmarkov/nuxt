@@ -6,10 +6,7 @@
  */
 
 import { createConfigForNuxt } from '@nuxt/eslint-config/flat';
-
-/**
- * Config example - https://github.dev/nuxt/eslint/blob/main/packages/eslint-config/src/flat/configs/nuxt.ts
- */
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 export default createConfigForNuxt({
     features: {
@@ -17,21 +14,41 @@ export default createConfigForNuxt({
         tooling: false,
         formatters: false,
     },
-}).append(
-    {
-        ignores: [''],
-    },
-    {
-        files: ['**/*.js', '**/*.mjs', '**/*.ts', '**/*.vue'],
+})
+    .override('nuxt/typescript/rules', {
         rules: {
+            '@typescript-eslint/no-explicit-any': 'off',
+        },
+    })
+    .override('nuxt/vue/single-root', {
+        rules: {
+            'vue/no-multiple-template-root': 'off',
+        },
+    })
+    .override('nuxt/vue/rules', {
+        rules: {
+            'vue/no-multiple-template-root': 'off',
             'vue/no-v-html': 'off',
             'vue/multi-word-component-names': 'off',
-            'no-console': [
-                'error',
-                {
-                    allow: ['warn', 'error'],
-                },
-            ],
+            'vue/require-default-prop': 'off',
         },
-    }
-);
+    })
+    .append(
+        {
+            ignores: ['**/.husky'],
+        },
+        {
+            files: ['**/*.js', '**/*.mjs', '**/*.ts', '**/*.vue'],
+            rules: {
+                'no-console': [
+                    'error',
+                    {
+                        allow: ['warn', 'error'],
+                    },
+                ],
+            },
+            plugins: {
+                ...eslintPluginPrettierRecommended.plugins,
+            },
+        }
+    );

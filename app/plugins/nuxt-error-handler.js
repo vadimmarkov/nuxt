@@ -1,3 +1,5 @@
+import { defineNuxtPlugin } from 'nuxt/app';
+
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.hook('vue:error', (..._args) => {
         console.warn(

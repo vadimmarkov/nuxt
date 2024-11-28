@@ -1,3 +1,4 @@
+import { useNuxtApp } from 'nuxt/app';
 import { delay, getCookie } from '@/utils';
 import useTONConnect from '~/composables/wallet/useTONConnect';
 
@@ -40,7 +41,10 @@ const mutations = {
 };
 
 const actions = {
-    async tryLoginByWallet({ commit, dispatch }, { walletType, isAcceptedTerms }) {
+    async tryLoginByWallet(
+        { commit, dispatch },
+        { walletType, isAcceptedTerms }
+    ) {
         commit('setMetaMaskType', 2);
         commit('setBinanceType', 2);
         commit('setCoin98Type', 2);
@@ -61,7 +65,10 @@ const actions = {
     },
 
     // Start login with wallet
-    async loginByWallet({ dispatch }, { walletType, isAcceptedTerms, addListener = true }) {
+    async loginByWallet(
+        { dispatch },
+        { walletType, isAcceptedTerms, addListener = true }
+    ) {
         localStorage.removeItem('ignoreWallets');
         const { $i18n } = useNuxtApp();
 
@@ -97,13 +104,20 @@ const actions = {
 
             const token = await dispatch('getToken', { address, signature });
 
-            dispatch('app/loadProfile', { token, address, walletType }, { root: true });
+            dispatch(
+                'app/loadProfile',
+                { token, address, walletType },
+                { root: true }
+            );
 
             if (addListener) {
                 dispatch('addListenerAddressChange', { walletType });
             }
         } catch (error) {
-            const text = typeof error === 'object' ? error.message || error.error : error;
+            const text =
+                typeof error === 'object'
+                    ? error.message || error.error
+                    : error;
             console.error(error);
             if (error.code && error.code !== 4001) {
                 // 4001 - USER REJECTED THE REQUEST
@@ -167,7 +181,9 @@ const actions = {
                     const prevWallets = [...wallets];
                     prevWallets.length = walletIndex;
 
-                    const isFoundPrevious = prevWallets.some((wallet) => resultObject[wallet]);
+                    const isFoundPrevious = prevWallets.some(
+                        (wallet) => resultObject[wallet]
+                    );
 
                     if (isFoundPrevious) {
                         return;
@@ -197,7 +213,10 @@ const actions = {
         const getAddress = async () => {
             if (walletType === 'MetaMask') {
                 const accounts = await window?.ethereum?.request({
-                    method: metaMaskType === 1 ? 'eth_accounts' : 'eth_requestAccounts',
+                    method:
+                        metaMaskType === 1
+                            ? 'eth_accounts'
+                            : 'eth_requestAccounts',
                 });
 
                 address = accounts[0];
@@ -209,7 +228,10 @@ const actions = {
 
             if (walletType === 'Binance') {
                 const accounts = await window?.BinanceChain.request({
-                    method: binanceType === 1 ? 'eth_accounts' : 'eth_requestAccounts',
+                    method:
+                        binanceType === 1
+                            ? 'eth_accounts'
+                            : 'eth_requestAccounts',
                 });
 
                 address = accounts[0];
@@ -217,7 +239,10 @@ const actions = {
 
             if (walletType === 'Coin98') {
                 const accounts = await window?.ethereum?.request({
-                    method: coin98Type === 1 ? 'eth_accounts' : 'eth_requestAccounts',
+                    method:
+                        coin98Type === 1
+                            ? 'eth_accounts'
+                            : 'eth_requestAccounts',
                 });
                 address = accounts[0];
             }
@@ -262,10 +287,18 @@ const actions = {
                     ...(tag && { tag }),
                     ...(campaignId && { binom_campaign_id: campaignId }),
                     ...(payload.promoCode && { promoCode: payload.promoCode }),
-                    ...(payload.utm_source && { utm_source: payload.utm_source }),
-                    ...(payload.utm_medium && { utm_medium: payload.utm_medium }),
-                    ...(payload.utm_campaign && { utm_campaign: payload.utm_campaign }),
-                    ...(payload.utm_content && { utm_content: payload.utm_content }),
+                    ...(payload.utm_source && {
+                        utm_source: payload.utm_source,
+                    }),
+                    ...(payload.utm_medium && {
+                        utm_medium: payload.utm_medium,
+                    }),
+                    ...(payload.utm_campaign && {
+                        utm_campaign: payload.utm_campaign,
+                    }),
+                    ...(payload.utm_content && {
+                        utm_content: payload.utm_content,
+                    }),
                     ...(payload.utm_term && { utm_term: payload.utm_term }),
                 };
 
@@ -279,7 +312,10 @@ const actions = {
                         });
                         if (code === 7023) {
                             // change tab on same modal
-                            this.$hideModal({ name: 'LoginRegistration', data: { tab: 2 } });
+                            this.$hideModal({
+                                name: 'LoginRegistration',
+                                data: { tab: 2 },
+                            });
                         }
                         reject(response);
                     }
@@ -300,14 +336,19 @@ const actions = {
             nonceObject: { nonce, address: nonceAddress },
         } = state;
 
-        return nonceAddress === payload.address && nonce ? nonce : getNonceResponse();
+        return nonceAddress === payload.address && nonce
+            ? nonce
+            : getNonceResponse();
     },
 
     // Sign the nonce
     getSignature(_context, { walletType, nonce, address }) {
         const msg = `0x${nonce
             .split('')
-            .reduce((h, c) => (h += c.charCodeAt(0).toString(16).padStart(2, '0')), '')}`;
+            .reduce(
+                (h, c) => (h += c.charCodeAt(0).toString(16).padStart(2, '0')),
+                ''
+            )}`;
 
         if (walletType === 'MetaMask') {
             return window.ethereum.request({
@@ -353,57 +394,61 @@ const actions = {
         const { $i18n } = useNuxtApp();
 
         return new Promise((resolve, reject) => {
-            this.$socketMediator.emit('auth.sign', options, ({ token, error, code }) => {
-                if (token) {
-                    resolve(token);
+            this.$socketMediator.emit(
+                'auth.sign',
+                options,
+                ({ token, error, code }) => {
+                    if (token) {
+                        resolve(token);
 
-                    return;
+                        return;
+                    }
+
+                    if (error) {
+                        this.$notify({
+                            type: 'error',
+                            title: $i18n.t('common.Login is blocked'),
+                            text: error,
+                        });
+
+                        reject(error);
+
+                        return;
+                    }
+
+                    if (code && code === 7017) {
+                        this.$notify({
+                            type: 'error',
+                            timeout: false,
+                            title: this.$t('common.Error'),
+                            text: $i18n.t(
+                                'wallets.Login is temporarily denied due to sports betting result decision changes. Please contact support for details.'
+                            ),
+                        });
+
+                        reject(error);
+
+                        return;
+                    }
+
+                    if (code && code === 2805) {
+                        this.$notify({
+                            type: 'error',
+                            timeout: false,
+                            title: $i18n.t('common.Login is blocked'),
+                            text: $i18n.t('common.Contact support for details'),
+                        });
+
+                        reject(error);
+
+                        return;
+                    }
+
+                    if (error) {
+                        reject(error);
+                    }
                 }
-
-                if (error) {
-                    this.$notify({
-                        type: 'error',
-                        title: $i18n.t('common.Login is blocked'),
-                        text: error,
-                    });
-
-                    reject(error);
-
-                    return;
-                }
-
-                if (code && code === 7017) {
-                    this.$notify({
-                        type: 'error',
-                        timeout: false,
-                        title: this.$t('common.Error'),
-                        text: $i18n.t(
-                            'wallets.Login is temporarily denied due to sports betting result decision changes. Please contact support for details.'
-                        ),
-                    });
-
-                    reject(error);
-
-                    return;
-                }
-
-                if (code && code === 2805) {
-                    this.$notify({
-                        type: 'error',
-                        timeout: false,
-                        title: $i18n.t('common.Login is blocked'),
-                        text: $i18n.t('common.Contact support for details'),
-                    });
-
-                    reject(error);
-
-                    return;
-                }
-
-                if (error) {
-                    reject(error);
-                }
-            });
+            );
         });
     },
 
@@ -445,13 +490,17 @@ const actions = {
 
     checkIfAddressRegistered(_context, address) {
         return new Promise((resolve) => {
-            this.$socketMediator.emit('profile.isLoginAddress', { address }, (response) => {
-                if (response === false || response.error != null) {
-                    resolve(false);
-                }
+            this.$socketMediator.emit(
+                'profile.isLoginAddress',
+                { address },
+                (response) => {
+                    if (response === false || response.error != null) {
+                        resolve(false);
+                    }
 
-                resolve(true);
-            });
+                    resolve(true);
+                }
+            );
         });
     },
     actionAuthTonPayload({ commit }) {

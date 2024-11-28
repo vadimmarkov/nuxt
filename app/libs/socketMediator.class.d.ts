@@ -1,8 +1,8 @@
 declare class SocketMediator {
-  constructor();
+    constructor();
 
-  on(eventName: string, listener: EventHandler): void;
-  off(eventName: string, listener: EventHandler): void;
-  emit(eventName: string, args?: object): Promise<any>;
+    on(eventName: string, listener: EventHandler): void;
+    off(eventName: string, listener: EventHandler): void;
+    emit(eventName: string, args?: object): Promise<any>;
 }
 export default SocketMediator;

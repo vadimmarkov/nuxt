@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client';
 
-console.log('use socket out');
+// console.log('use socket out');
 
 const { serverUri } = useRuntimeConfig().public;
 
@@ -17,7 +17,7 @@ const emit = (eventName: string, args = {}) => {
 };
 
 export function useSocket() {
-    console.log('use socket in');
+    // console.log('use socket in');
 
     // async function initSocket() {
     //     console.log('initSocket');

@@ -7,15 +7,15 @@ const route = useRoute();
 
 definePageMeta({
     validate: (route) => {
-        console.log('route ->', route);
+        console.warn('route ->', route);
 
-        const { game } = route.params;
+        // const { game } = route.params;
 
-        const dapps = useState('connectionData');
+        // const dapps = useState('connectionData');
 
         // const dapps = connectionData;
 
-        console.log('dapps', dapps.value);
+        // console.log('dapps', dapps.value);
         // console.log('connectionData', connectionData);
 
         // data.dapps
@@ -29,7 +29,7 @@ definePageMeta({
 });
 
 onMounted(() => {
-    console.log('route', route.params.game);
+    // console.log('route', route.params.game);
 });
 </script>
 

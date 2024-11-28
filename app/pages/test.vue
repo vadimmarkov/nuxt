@@ -31,18 +31,18 @@ const { tryLoginByWallet } = useWallets();
 const token = ref<string>('');
 
 async function login(): Promise<void> {
-    console.log('start');
+    // console.log('start');
 
     // let t = localStorage.getItem('token');
     let t = null;
 
     if (!t) {
-        t = await tryLoginByWallet('MetaMask');
+        t = await tryLoginByWallet('TronLink');
 
         token.value = t;
         // localStorage.setItem('token', t);
 
-        console.log('token', t);
+        // console.log('token', t);
     }
 
     // console.log('token', localStorage.getItem('token'));
@@ -63,11 +63,13 @@ async function getUserProfile(): Promise<void> {
     // token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZGZlMTMxMjYzODdjYzcwNDhmMWE4ZGUiLCJpYXQiOjE3MzI3NDAxNDIsImV4cCI6MTc2NDI3NjE0Mn0.rb2aq_28kZKQxpngQL1F85NI7Pw9iwYRANx0WBoq2sQ"
     // tz : -120
 
-    console.log('options', options);
+    // console.log('options', options);
 
     const profile = await socket.emit('profile.token', options);
+
+    console.warn({ profile });
     //
-    console.log('profile', profile);
+    // console.log('profile', profile);
 }
 </script>
 

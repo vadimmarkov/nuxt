@@ -7,20 +7,13 @@ export default defineNuxtConfig({
             charset: 'utf-8',
             viewport: 'width=device-width, initial-scale=1',
         },
-        script: [
-            {
-                src: '/_nuxt/entry.js',
-                body: true, // Додає скрипт у кінець <body>
-                type: 'module',
-            },
-        ],
-    },
-
-    /**
-     * Disable auto-importing components
-     */
-    components: {
-        dirs: [],
+        // script: [
+        //     {
+        //         src: '/_nuxt/entry.js',
+        //         body: true, // Додає скрипт у кінець <body>
+        //         type: 'module',
+        //     },
+        // ],
     },
 
     /**
@@ -63,6 +56,10 @@ export default defineNuxtConfig({
      */
     components: false,
 
+    // components: {
+    //     dirs: [],
+    // },
+
     devtools: {
         enabled: true,
 
@@ -86,7 +83,7 @@ export default defineNuxtConfig({
     compatibilityDate: '2024-11-01',
 
     nitro: {
-        preset: 'node-server',
+        // preset: 'node-server',
 
         compressPublicAssets: {
             /**

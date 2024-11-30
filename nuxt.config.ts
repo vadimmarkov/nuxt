@@ -48,7 +48,7 @@ export default defineNuxtConfig({
     /**
      * ESLint Module - https://eslint.nuxt.com/packages/module
      */
-    modules: ['@nuxt/eslint'],
+    modules: ['@nuxt/eslint', '@pinia/nuxt'],
 
     /**
      * Disable Nuxt component auto-registration

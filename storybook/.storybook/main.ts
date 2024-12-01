@@ -4,7 +4,8 @@ import { fileURLToPath, URL } from 'node:url';
 
 const config: StorybookConfig = {
     stories: ['../../UIKit/**/*.stories.@(js|ts)'],
-    addons: ['@storybook/addon-essentials'],
+    addons: ['@storybook/addon-essentials', '@chromatic-com/storybook'],
+
     framework: {
         name: '@storybook/vue3-vite',
         options: {},
@@ -37,6 +38,8 @@ const config: StorybookConfig = {
             },
         });
     },
+
+    docs: {},
 };
 
 export default config;

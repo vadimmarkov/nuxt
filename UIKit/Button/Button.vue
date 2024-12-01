@@ -128,7 +128,7 @@ const component = computed(() => {
 @import './Button.scss';
 
 .button-3d {
-    @include button-3d;
+    @include button;
 }
 
 // Colors

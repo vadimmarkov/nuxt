@@ -178,7 +178,7 @@ $button-sizes: (
 );
 
 // Mixins
-@mixin button-3d {
+@mixin button {
     //@extend %unselectable;
 
     -moz-appearance: none;

@@ -1,0 +1,473 @@
+//@use 'sass:math';
+//@use 'sass:meta';
+//@use 'sass:string';
+
+//@import './btn-loader.mixin.scss';
+
+// Colors
+$button-colors: (
+    'red': (
+        'linear-gradient': (
+            'default': linear-gradient(360deg, #c4003b 0.8%, #fb1949 100%),
+            'hover': linear-gradient(3360deg, #db0a49 0.8%, #fb2b57 100%),
+            'pressed': linear-gradient(360deg, #c4003b 0.8%, #fb1949 100%),
+        ),
+        'box-shadow': (
+            'default': #{0px 3px 16px rgba(255, 35, 65, 0.5),
+            inset 0px 4px 3px rgba(#fff, 0.3)},
+
+            'hover': #{0px 3px 20px rgba(#ff2341, 0.6),
+            inset 0px 4px 4px rgba(#fff, 0.37)},
+
+            'pressed': #{0px 3px 16px rgba(#ff2341, 0.4),
+            inset 0px 3px 3px rgba(#fff, 0.3)},
+        ),
+        'shadow-color': #61001d,
+    ),
+    'blue': (
+        'linear-gradient': (
+            'default': linear-gradient(360deg, #0c5eff 0.8%, #1398f9 100%),
+            'hover': linear-gradient(360deg, #236eff 0.8%, #34a7fb 100%),
+            'pressed': linear-gradient(360deg, #0c5eff 0.8%, #1398f9 100%),
+        ),
+        'box-shadow': (
+            'default': #{0px 3px 28px rgba(#2283f6, 0.4),
+            inset 0px 3px 3px rgba(#fff, 0.3)},
+
+            'hover': #{0px 3px 20px rgba(#2283f6, 0.6),
+            inset 0px 4px 4px rgba(#fff, 0.37)},
+
+            'pressed': #{0px 3px 16px rgba(#2283f6, 0.4),
+            inset 0px 3px 3px rgba(#fff, 0.3)},
+        ),
+        'shadow-color': #003293,
+    ),
+
+    'green': (
+        'linear-gradient': (
+            'default': linear-gradient(360deg, #009420 0.8%, #1bb83d 100%),
+            'hover': linear-gradient(360deg, #01a825 0.8%, #27ce4b 100%),
+            'pressed': linear-gradient(360deg, #009420 0.8%, #1bb83d 100%),
+        ),
+        'box-shadow': (
+            'default': #{0px 2px 24px 0px rgba(27, 184, 61, 0.4),
+            inset 0px 3px 3px 0px rgba(255, 255, 255, 0.3)},
+
+            'hover': #{0px 3px 28px 0px rgba(27, 184, 61, 0.5),
+            inset 0px 4px 4px 0px rgba(255, 255, 255, 0.37)},
+
+            'pressed': #{0px 2px 24px 0px rgba(27, 184, 61, 0.4),
+            inset 0px 3px 3px rgba(255, 255, 255, 0.3)},
+        ),
+        'shadow-color': #004e11,
+    ),
+
+    'yellow': (
+        'linear-gradient': (
+            'default': linear-gradient(359deg, #f7931a 0.8%, #f0b90b 99.19%),
+            'hover': linear-gradient(359deg, #f7931a 0.8%, #f1bd19 99.19%),
+            'pressed': linear-gradient(359deg, #f7931a 0.8%, #f0b90b 99.19%),
+        ),
+        'box-shadow': (
+            'default': #{0px 3px 28px 0px rgba(255, 182, 54, 0.5),
+            0px 4px 3px 0px rgba(255, 255, 255, 0.3) inset},
+
+            'hover': #{0px 3px 20px 0px rgba(255, 182, 54, 0.7),
+            0px 5px 4px 0px rgba(255, 255, 255, 0.38) inset},
+
+            'pressed': #{0px 3px 16px 0px rgba(255, 182, 54, 0.5),
+            0px 4px 3px 0px rgba(255, 255, 255, 0.3) inset},
+        ),
+        'shadow-color': #8a5b0a,
+    ),
+);
+
+// Sizes
+$button-sizes: (
+    'xs': (
+        border-radius: 6px,
+        font-class: 'h9',
+        icon-size: 16px,
+        padding-vertical: 5px,
+        padding-horizontal: 14px,
+
+        text-margin: 2px,
+        icon-margin-shift: 4px,
+        default-bottom-shift: 2px,
+        hover-bottom-shift: -1px,
+        active-bottom-shift: 2px,
+
+        // Spiner
+        spiner-size: 16px,
+        spin-width: 1.5px,
+        spin-height: 4.5px,
+    ),
+    'sm': (
+        border-radius: 8px,
+        font-class: 'h8',
+        icon-size: 20px,
+        padding-vertical: 6.5px,
+        padding-horizontal: 16px,
+
+        text-margin: 4px,
+        icon-margin-shift: 4px,
+        default-bottom-shift: 3px,
+        hover-bottom-shift: -2px,
+        active-bottom-shift: 1px,
+
+        // Spiner
+        spiner-size: 20px,
+        spin-width: 2px,
+        spin-height: 5.5px,
+    ),
+    'md': (
+        border-radius: 8px,
+        font-class: 'h7',
+        icon-size: 24px,
+        padding-vertical: 10px,
+        padding-horizontal: 20px,
+
+        text-margin: 4px,
+        icon-margin-shift: 4px,
+        default-bottom-shift: 4px,
+        hover-bottom-shift: -2px,
+        active-bottom-shift: 1px,
+
+        // Spiner
+        spiner-size: 24px,
+        spin-width: 2.5px,
+        spin-height: 6.5px,
+    ),
+    'lg': (
+        border-radius: 12px,
+        font-class: 'h6',
+        icon-size: 24px,
+        padding-vertical: 14px,
+        padding-horizontal: 20px,
+
+        text-margin: 6px,
+        icon-margin-shift: 4px,
+        default-bottom-shift: 4px,
+        hover-bottom-shift: -2px,
+        active-bottom-shift: 1px,
+
+        // Spiner
+        spiner-size: 24px,
+        spin-width: 2.5px,
+        spin-height: 6.5px,
+    ),
+    'double-line': (
+        border-radius: 8px,
+        font-class-first: 'h7',
+        font-class-second: 'b3',
+
+        icon-size: 17px,
+        padding-vertical: 4px,
+        padding-horizontal: 17px,
+        text-margin: 4px,
+        icon-margin-shift: 12px,
+        default-bottom-shift: 4px,
+        hover-bottom-shift: -2px,
+        active-bottom-shift: 1px,
+
+        // Spiner
+        spiner-size: 24px,
+        spin-width: 2.5px,
+        spin-height: 6.5px,
+    ),
+);
+
+// Mixins
+@mixin button-3d {
+    //@extend %unselectable;
+
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    text-decoration: none;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    display: inline-block;
+    padding: 0;
+
+    &:after {
+        //@extend %unselectable;
+        pointer-events: none;
+
+        content: '';
+        display: block;
+
+        position: absolute;
+        z-index: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    &__outer {
+        position: relative;
+        z-index: 1;
+        display: block;
+        width: 100%;
+        height: 100%;
+
+        //@include transitions(transform);
+    }
+
+    &__inner {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: var(--color_white);
+
+        &:deep(.icon) {
+            width: 100%;
+            height: 100%;
+            display: block;
+
+            //svg {
+            //    fill: var(--color_white);
+            //}
+        }
+
+        img {
+            width: 80%;
+        }
+    }
+
+    &__text {
+        color: var(--color_white);
+        font-weight: 600;
+        font-variant-numeric: lining-nums tabular-nums;
+
+        //@extend %text-overflow;
+    }
+
+    // Text align
+    &_center {
+        .button-3d__inner {
+            justify-content: center;
+        }
+    }
+    &_left {
+        .button-3d__inner {
+            justify-content: flex-start;
+        }
+    }
+    &_right {
+        .button-3d__inner {
+            justify-content: flex-end;
+        }
+    }
+
+    // Modifiers
+    &_loading {
+        pointer-events: none;
+
+        .button-3d__text_double,
+        .button-3d__text,
+        .button-3d__icon {
+            opacity: 0;
+        }
+    }
+
+    &:disabled {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+
+    &_fullwidth {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@mixin button-size($props) {
+    $border-radius: map-get($props, 'border-radius');
+    $icon-size: map-get($props, 'icon-size');
+
+    $font-class-first: map-get($props, 'font-class-first');
+    $font-class-second: map-get($props, 'font-class-second');
+
+    $text-margin: map-get($props, 'text-margin');
+    $padding-horizontal: map-get($props, 'padding-horizontal');
+    $padding-vertical: map-get($props, 'padding-vertical');
+
+    $font-class: map-get($props, 'font-class');
+
+    $icon-margin-shift: map-get($props, 'icon-margin-shift');
+
+    $default-bottom-shift: map-get($props, 'default-bottom-shift');
+    $hover-bottom-shift: map-get($props, 'hover-bottom-shift');
+    $active-bottom-shift: map-get($props, 'active-bottom-shift');
+
+    &.button-3d {
+        padding-bottom: $default-bottom-shift;
+
+        &:after {
+            height: $icon-size + $padding-vertical * 2;
+            border-radius: $border-radius;
+        }
+
+        .button-3d__outer {
+            border-radius: $border-radius;
+        }
+    }
+
+    &.button-3d:hover {
+        .button-3d__outer {
+            transform: translateY($hover-bottom-shift);
+        }
+    }
+
+    &.button-3d:active {
+        .button-3d__outer {
+            transform: translateY($active-bottom-shift);
+        }
+    }
+
+    &.button-3d_only-icon {
+        .button-3d__outer {
+            padding: $padding-vertical;
+        }
+    }
+
+    &:not(.button-3d_only-icon) {
+        .button-3d__outer {
+            padding: $padding-vertical $padding-horizontal;
+        }
+
+        .button-3d__icon {
+            &:first-child {
+                margin-left: -$icon-margin-shift;
+                margin-right: $text-margin;
+            }
+
+            &:last-child {
+                margin-left: $text-margin;
+                margin-right: -$icon-margin-shift;
+            }
+        }
+    }
+
+    .button-3d__icon {
+        width: $icon-size;
+        height: $icon-size;
+
+        // Fix for BfIcon component
+        &:deep(.icon) {
+            width: $icon-size;
+            height: $icon-size;
+
+            svg {
+                width: $icon-size;
+                height: $icon-size;
+            }
+        }
+
+        //&:first-child + .button-3d__text:not(:has(+ .button-3d__icon)) {
+        //margin-right: -$text-margin-shift;
+        //}
+    }
+
+    // Button with 1 line text
+    //@if $font-class {
+    //    .button-3d__text {
+    //        @include meta.apply(meta.get-mixin($font-class), 0);
+    //
+    //        line-height: $icon-size;
+    //
+    //        &:first-child:has(+ .button-3d__icon) {
+    //            //margin-left: -$text-margin-shift;
+    //        }
+    //    }
+    //}
+
+    // Button with 2 lines text
+    //@if $font-class-first and $font-class-second {
+    //    .button-3d__text {
+    //        display: flex;
+    //        flex-direction: column;
+    //        line-height: $icon-size;
+    //
+    //        :deep(span) {
+    //            &:first-child {
+    //                @include meta.apply(meta.get-mixin($font-class-first), 0);
+    //            }
+    //
+    //            &:last-child {
+    //                @include meta.apply(meta.get-mixin($font-class-second), 0);
+    //
+    //                color: rgba(255, 255, 255, 0.7);
+    //            }
+    //        }
+    //    }
+    //}
+
+    // Hotfix
+    //&.button-3d_fullwidth:not(.button-3d_only-icon):not(:has(.button-3d__icon)) {
+    //    .button-3d__outer {
+    //        padding-left: 8px;
+    //        padding-right: 8px;
+    //    }
+    //}
+
+    .button-3d__spinner {
+        //@include btn-loader-size($props);
+    }
+}
+
+@mixin button-color($props) {
+    $linear-gradient-object: map-get($props, 'linear-gradient');
+    $box-shadow-object: map-get($props, 'box-shadow');
+    $shadow-color: map-get($props, 'shadow-color');
+
+    $linear-gradient-default: map-get($linear-gradient-object, 'default');
+    $linear-gradient-hover: map-get($linear-gradient-object, 'hover');
+    $linear-gradient-pressed: map-get($linear-gradient-object, 'pressed');
+
+    $box-shadow-default: map-get($box-shadow-object, 'default');
+    $box-shadow-hover: map-get($box-shadow-object, 'hover');
+    $box-shadow-pressed: map-get($box-shadow-object, 'pressed');
+
+    &.button-3d {
+        &:after {
+            background-color: $shadow-color;
+        }
+
+        .button-3d__outer {
+            background: $linear-gradient-default;
+            box-shadow: $box-shadow-default;
+        }
+    }
+
+    &.button-3d:hover {
+        .button-3d__outer {
+            background: $linear-gradient-hover;
+            box-shadow: $box-shadow-hover;
+        }
+    }
+
+    &.button-3d:active {
+        .button-3d__outer {
+            background: $linear-gradient-pressed;
+            box-shadow: $box-shadow-pressed;
+        }
+    }
+
+    .button-3d__spinner {
+        //@include btn-loader-color($white);
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "name": "storybook",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "storybook": "storybook dev -p 6006",
+        "build-storybook": "npm run symlink && storybook build"
+    },
+    "dependencies": {
+        "vue": "^3.4.21"
+    },
+    "devDependencies": {
+        "@storybook/addon-essentials": "^8.2.9",
+        "@storybook/blocks": "^8.2.9",
+        "@storybook/manager-api": "^8.2.9",
+        "@storybook/test": "^8.2.9",
+        "@storybook/theming": "^8.2.9",
+        "@storybook/vue3": "^8.2.9",
+        "@storybook/vue3-vite": "^8.2.9",
+        "@vitejs/plugin-vue": "^5.0.4",
+        "sass": "^1.72.0",
+        "storybook": "^8.2.9",
+        "typescript": "^5.2.2",
+        "vite": "^5.2.0",
+        "vue-tsc": "^2.0.6"
+    }
+}

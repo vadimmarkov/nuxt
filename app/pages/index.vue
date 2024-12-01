@@ -1,6 +1,5 @@
 <template>
     <p :class="$style.red">index page</p>
-    <!--<img src="images/public-logo.png" alt="" >-->
 
     <ul>
         <li>
@@ -16,10 +15,6 @@
 
 <script setup lang="ts">
 const dapps = useState('connectionData');
-
-// import { useSocket } from '@/app/composables/useSocket';
-
-// const { emit } = useSocket();
 </script>
 
 <style module>

@@ -1,83 +1,62 @@
 import type { Socket } from 'socket.io-client';
 import delay from '@/app/utils';
 
-// const socket = ref();
-
 let socket: Socket;
-
-// console.log('in head socket', socket);
+const reconnecting = ref<boolean>(false);
 
 export function useSocket() {
-    // console.log('in body', socket);
-
-    async function initSocket() {
-        // console.log('initSocket');
-
+    async function initSocket(): Promise<void> {
         const { io } = await import('socket.io-client');
-
-        // console.log('io', io);
-
         const { serverUri } = useRuntimeConfig().public;
 
-        // Ініціалізація WebSocket підключення
-
-        const options = {};
-
-        // if (!socket) {
-        socket = io(serverUri, options);
-
-        // console.log('create socket', socket);
-
-        socket.on('connect', () => {
-            // isConnected.value = true
-            // console.log('Connected to WebSocket server');
+        socket = io(serverUri, {
+            query: { mobile: false },
+            reconnectionDelayMax: 10000,
         });
 
-        socket.on('disconnect', () => {
-            // isConnected.value = false
-            // console.log('Disconnected from WebSocket server');
-        });
+        socket.on('connect', (): void => {
+            reconnecting.value = false;
 
-        // Обробка помилок
-        socket.on('connect_error', (error) => {
-            console.error('Connection error:', error);
+            console.warn('Socket connected!');
+        });
+        socket.on('disconnect', (): void => {
+            reconnecting.value = false;
+
+            console.warn('Socket disconnected!');
+        });
+        socket.io.on('error', async (error): Promise<void> => {
+            console.warn('Socket connection error:', error.message);
         });
     }
 
     // Надсилання повідомлення
-    async function emit(event: string, message: any): Promise<any> {
+    async function emit(eventName: string, args?: any): Promise<any> {
         while (!socket) {
             await delay(100);
         }
 
         return new Promise((resolve): void => {
-            socket.emit(event, message, (response: any) => {
+            socket.emit(eventName, args || {}, (response: any) => {
                 resolve(response);
             });
         });
     }
 
     // Прослуховування події
-    async function on(event: string, callback: (data: any) => void) {
+    async function on(eventName: string, ack: (data: any) => void) {
         while (!socket) {
             await delay(100);
         }
 
-        socket.on(event, callback);
+        socket.on(eventName, ack);
     }
-
-    // Від'єднання та очищення
-    // onUnmounted(() => {
-    //     if (socket) {
-    //         socket.disconnect();
-    //     }
-    // });
 
     return {
         initSocket,
-        // isConnected,
+
         emit,
         on,
-        // lastMessage,
+
+        reconnecting,
     };
 }

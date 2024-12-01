@@ -13,7 +13,7 @@ export const useStakingStore = defineStore('staking', {
         async loadHistory() {
             const { emit } = useSocket();
 
-            const { all, my } = await emit('dividends.getHistory', {});
+            const { all, my } = await emit('dividends.getHistory');
 
             this.history.all = all;
             this.history.my = my;

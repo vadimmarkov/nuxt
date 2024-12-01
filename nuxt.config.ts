@@ -6,14 +6,16 @@ export default defineNuxtConfig({
             titleTemplate: '%s',
             charset: 'utf-8',
             viewport: 'width=device-width, initial-scale=1',
+            link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+
+            script: [
+                {
+                    src: '/_nuxt/entry.js',
+                    body: true, // Додає скрипт у кінець <body>
+                    type: 'module',
+                },
+            ],
         },
-        // script: [
-        //     {
-        //         src: '/_nuxt/entry.js',
-        //         body: true, // Додає скрипт у кінець <body>
-        //         type: 'module',
-        //     },
-        // ],
     },
 
     /**

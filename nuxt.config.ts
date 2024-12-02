@@ -58,10 +58,6 @@ export default defineNuxtConfig({
      */
     components: false,
 
-    // components: {
-    //     dirs: [],
-    // },
-
     devtools: {
         enabled: true,
 
